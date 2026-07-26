@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="fairino3_v6_rail">
+  <!-- ================================================================
+       Y-axis prismatic rail — allows the whole arm to slide parallel
+       to the net.  rail_base is fixed to the world; rail_y moves
+       base_link ±0.35 m in Y.
+       ================================================================ -->
+  <link name="rail_base">
+    <inertial>
+      <origin xyz="0 0 -0.04" rpy="0 0 0" />
+      <mass value="8.0" />
+      <inertia ixx="0.15" ixy="0" ixz="0" iyy="0.80" iyz="0" izz="0.80" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0" />
+      <geometry>
+        <box size="0.82 0.14 0.08" />
+      </geometry>
+      <material name="rail_grey">
+        <color rgba="0.35 0.35 0.38 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0" />
+      <geometry>
+        <box size="0.82 0.14 0.08" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rail_y" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="rail_base" />
+    <child link="base_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.35" upper="0.35" effort="150" velocity="0.5" />
+    <dynamics damping="40" friction="0.5" />
+  </joint>
+
+  <!-- ================================================================
+       Original Fairino3 V6 arm + paddle (from base_link onward)
+       ================================================================ -->
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00049027 -0.00045095 0.032527"
+        rpy="0 0 0" />
+      <mass
+        value="0.78393" />
+      <inertia
+        ixx="0.0013854"
+        ixy="1.1455E-05"
+        ixz="-1.0642E-05"
+        iyy="0.0013849"
+        iyz="-9.7435E-06"
+        izz="0.001977" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="shoulder_link">
+    <inertial>
+      <origin
+        xyz="-3.8658E-07 -0.0024176 0.13519"
+        rpy="0 0 0" />
+      <mass
+        value="2.1225" />
+      <inertia
+        ixx="0.0033227"
+        ixy="-5.0648E-08"
+        ixz="-6.3401E-09"
+        iyy="0.0032419"
+        iyz="4.3768E-05"
+        izz="0.0023129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/shoulder_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/shoulder_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="shoulder_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-3.0543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="upperarm_link">
+    <inertial>
+      <origin
+        xyz="-0.14111 3.4656E-06 0.11053"
+        rpy="0 0 0" />
+      <mass
+        value="4.8053" />
+      <inertia
+        ixx="0.0075945"
+        ixy="3.7143E-07"
+        ixz="-7.9228E-12"
+        iyy="0.0081317"
+        iyz="-1.2918E-11"
+        izz="0.0059231" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/upperarm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/upperarm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.14"
+      rpy="1.5708 0 0" />
+    <parent
+      link="shoulder_link" />
+    <child
+      link="upperarm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-4.6251"
+      soft_upper_limit="1.4835"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="forearm_link">
+    <inertial>
+      <origin
+        xyz="-0.18987 5.2268E-06 0.0034145"
+        rpy="0 0 0" />
+      <mass
+        value="2.2312" />
+      <inertia
+        ixx="0.0028852"
+        ixy="7.3389E-07"
+        ixz="-3.5373E-05"
+        iyy="0.0035145"
+        iyz="-2.8527E-07"
+        izz="0.0029186" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/forearm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/forearm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j3"
+    type="revolute">
+    <origin
+      xyz="-0.28 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="upperarm_link" />
+    <child
+      link="forearm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.8274"
+      upper="2.8274"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-2.8274"
+      soft_upper_limit="2.8274"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="wrist1_link">
+    <inertial>
+      <origin
+        xyz="4.5665E-07 -0.0034666 0.098292"
+        rpy="0 0 0" />
+      <mass
+        value="1.5961" />
+      <inertia
+        ixx="0.0020112"
+        ixy="6.8085E-09"
+        ixz="2.4945E-08"
+        iyy="0.0014524"
+        iyz="3.2511E-05"
+        izz="0.0019076" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j4"
+    type="revolute">
+    <origin
+      xyz="-0.24001 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="forearm_link" />
+    <child
+      link="wrist1_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-4.6251"
+      soft_upper_limit="1.4835"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="wrist2_link">
+    <inertial>
+      <origin
+        xyz="-4.5262E-07 0.0034666 0.098292"
+        rpy="0 0 0" />
+      <mass
+        value="1.5961" />
+      <inertia
+        ixx="0.0020112"
+        ixy="6.8086E-09"
+        ixz="-2.4945E-08"
+        iyy="0.0014524"
+        iyz="-3.2511E-05"
+        izz="0.0019076" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j5"
+    type="revolute">
+    <origin
+      xyz="0 0 0.102"
+      rpy="1.5708 0 0" />
+    <parent
+      link="wrist1_link" />
+    <child
+      link="wrist2_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-3.0543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="wrist3_link">
+    <inertial>
+      <origin
+        xyz="7.559E-05 1.3858E-05 0.076619"
+        rpy="0 0 0" />
+      <mass
+        value="0.53877" />
+      <inertia
+        ixx="0.00028785"
+        ixy="-2.0584E-09"
+        ixz="-1.3892E-07"
+        iyy="0.00028896"
+        iyz="1.8115E-07"
+        izz="0.00042655" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist3_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="meshes/wrist3_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j6"
+    type="revolute">
+    <origin
+      xyz="0 0 0.102"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="wrist2_link" />
+    <child
+      link="wrist3_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-3.0543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+
+  <link name="tool_clamp_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.35" />
+      <inertia ixx="0.00045" ixy="0" ixz="0" iyy="0.00045" iyz="0" izz="0.00035" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.035" rpy="0 0 0" />
+      <geometry>
+        <box size="0.07 0.055 0.07" />
+      </geometry>
+      <material name="tool_silver">
+        <color rgba="0.55 0.55 0.52 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.035" rpy="0 0 0" />
+      <geometry>
+        <box size="0.07 0.055 0.07" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist3_to_tool_clamp" type="fixed">
+    <origin xyz="0 0 0.075" rpy="0 0 0" />
+    <parent link="wrist3_link" />
+    <child link="tool_clamp_link" />
+  </joint>
+
+  <link name="paddle_handle_link">
+    <inertial>
+      <origin xyz="0 0 0.075" rpy="0 0 0" />
+      <mass value="0.08" />
+      <inertia ixx="0.00012" ixy="0" ixz="0" iyy="0.00012" iyz="0" izz="0.00002" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.075" rpy="0 0 0" />
+      <geometry>
+        <box size="0.028 0.018 0.15" />
+      </geometry>
+      <material name="handle_wood">
+        <color rgba="0.68 0.43 0.20 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.075" rpy="0 0 0" />
+      <geometry>
+        <box size="0.028 0.018 0.15" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="tool_clamp_to_paddle_handle" type="fixed">
+    <origin xyz="0 0 0.07" rpy="0 0 0" />
+    <parent link="tool_clamp_link" />
+    <child link="paddle_handle_link" />
+  </joint>
+
+  <link name="paddle_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.17" />
+      <inertia ixx="0.00034" ixy="0" ixz="0" iyy="0.00062" iyz="0" izz="0.00034" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0.004 0" rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.082" length="0.004" />
+      </geometry>
+      <material name="paddle_red">
+        <color rgba="0.75 0.05 0.04 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.004 0" rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.082" length="0.004" />
+      </geometry>
+      <material name="paddle_black">
+        <color rgba="0.015 0.012 0.01 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.082" length="0.012" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="paddle_handle_to_paddle" type="fixed">
+    <origin xyz="0 0 0.19" rpy="0 0 1.5708" />
+    <parent link="paddle_handle_link" />
+    <child link="paddle_link" />
+  </joint>
+</robot>

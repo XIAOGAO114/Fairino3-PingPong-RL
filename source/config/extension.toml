@@ -1,0 +1,22 @@
+[package]
+
+version = "0.1.0"
+category = "isaaclab"
+readme  = "README.md"
+
+title = "Fairino3 Rail Ping-Pong"
+author = "User"
+maintainer = "User"
+description = "Fairino3 dual-arm ping-pong RL with Isaac Lab"
+repository = "https://github.com/XIAOGAO114/Fairino3-PingPong-RL"
+keywords = ["fairino3", "pingpong", "fairino3_dual", "isaaclab"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_mimic" = {}
+"isaaclab_rl" = {}
+"isaaclab_tasks" = {}
+
+[[python.module]]
+name = "fairino3_pingpong"

@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.so
 *.egg-info/
+*.eggs/
 
 # Isaac Sim / Isaac Lab
 *.usd~
@@ -22,5 +23,7 @@ logs/
 .DS_Store
 Thumbs.db
 
-# Large training artifacts (optional — uncomment if needed)
-# checkpoints/*.pt
+# pip install artifacts
+build/
+dist/
+*.egg-info/
