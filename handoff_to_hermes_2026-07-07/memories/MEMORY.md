@@ -1,0 +1,14 @@
+- [rail_first_good_checkpoint](rail_first_good_checkpoint.md) — model_448.pt: first clean checkpoint, 97% clean_right
+- [v6_generalize_1543](v6_generalize_1543.md) — model_1543.pt: generalization with expanded serves, 97.1%
+- [v7b_height_scale_1842](v7b_height_scale_1842.md) — model_1842.pt: height-scaled rewards, 94.7%, visually lower returns
+- [dual_arm_project](dual_arm_project.md) — test_isaac_dual project: two Fairino3+rail setup, scaffold ready
+- [dual_arm_2026-05-27_state](dual_arm_2026-05-27_state.md) — 2026-05-27 重大重构：DualArmActor 模型、soft关节角、工厂函数奖励、左臂 model_1543 冻结训练
+- [dual_arm_2026-05-28_state](dual_arm_2026-05-28_state.md) — 2026-05-28：左臂v7b高度压低版(2541)+右臂v6(2225)合并，终止条件简化，待微调
+- [right_arm_project](right_arm_project.md) — test_isaac_rail_right：右臂单臂训练项目（镜像左臂配置），home_side="right"
+- [right_arm_2026-05-28_progress](right_arm_2026-05-28_progress.md) — 2026-05-28：发球验证方向修复，旋转惩罚，model_1325 达83%成功率
+- [2026-05-29-height-finetune](2026-05-29-height-finetune.md) — 高度奖励收紧(h5: max_good_z=0.35, min_factor=0.2, weight=-18)，双臂+10cm位置适配，ball_spin移除
+- [dual-arm-bugfixes](dual-arm-bugfixes.md) — 双臂两大bug：actor_critic→actor、load_left_actor的mlp.前缀缺失
+- [2026-05-30-dual-arm-investigation](2026-05-30-dual-arm-investigation.md) — 右臂在双臂中无法击球的排查：非发球参数/observation/动作值，右臂已用扁平发球重训(model_4071)，待验证
+- [best-single-arm-models](best-single-arm-models.md) — 最终保底：model_1543(左,x=-0.97,97%) + model_2225(右,x=2.07,84%), 双臂位置已对齐
+- [2026-05-31-state](2026-05-31-state.md) — opponent_compatible全版本完结，右臂peak 45%/左臂26%，待合并
+- [2026-05-31-eod](2026-05-31-eod.md) — 全天总结：env_cfg修复、compat多轮实验、从头训练、结论
