@@ -4,9 +4,11 @@
 
 ## Demo 演示
 
-**双臂对打 Rally 效果：**
+**双臂对打 Rally 效果：**（点击观看）
 
-https://github.com/XIAOGAO114/Fairino3-PingPong-RL/blob/main/videos/demo_dual_arm_rally.mp4
+[![Demo Video](videos/demo_dual_arm_rally.mp4)](https://github.com/XIAOGAO114/Fairino3-PingPong-RL/blob/main/videos/demo_dual_arm_rally.mp4)
+
+> 更多视频见 [videos/](./videos/) 目录
 
 ## 项目概述
 
