@@ -10,6 +10,8 @@
 
 使用 NVIDIA Isaac Lab 训练 **Fairino3 工业机械臂** 打乒乓球。最终目标是两个 7-DOF 机械臂（左臂+右臂）持续对打（rally）。
 
+> ⚠️ **重要说明：** 本项目为课程学习产出。仓库提供完整的环境配置、模型架构和奖励设计源码以供参考，但**依赖特定的 Isaac Lab 工作空间和内部工具链，源码无法直接独立运行训练**。预训练 checkpoint 已提供，可用于推理和可视化。
+
 ```
 6-DOF 固定底座 → 7-DOF + 导轨 (左臂) → 7-DOF 右臂 → 双臂对打
 ```
@@ -32,29 +34,12 @@
 
 > ⚠️ 版本必须匹配。Isaac Lab 0.54.x 对应 Isaac Sim 4.5.0，其他版本组合未经测试。
 
-## 快速开始
+## 源码参考
 
-### 1. 安装 Isaac Lab
+以下为训练命令参考（需完整的 Isaac Lab workspace，不可直接运行）：
 
-参考 [Isaac Lab 官方安装指南](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html)，确保 Isaac Sim 4.5.0 + Isaac Lab 0.54.3 环境可用。
-
-### 2. 安装本扩展
-
-```bash
-cd source/fairino3_pingpong
-pip install -e .     # 或: python -m pip install -e .
-```
-
-### 3. 验证安装
-
-```bash
-# 列出已注册任务，应能看到 Fairino3 相关条目
-python -c "import isaaclab_tasks; isaaclab_tasks.utils.import_packages('fairino3_pingpong.tasks')"
-```
-
-## 训练
-
-### 单臂左臂（7-DOF + 导轨）
+<details>
+<summary>单臂左臂（7-DOF + 导轨）</summary>
 
 ```bash
 python scripts/train.py \
@@ -62,8 +47,10 @@ python scripts/train.py \
   --num_envs 512 --max_iterations 500 --headless \
   --run_name left_arm_exp1
 ```
+</details>
 
-### 单臂右臂（镜像）
+<details>
+<summary>单臂右臂（镜像）</summary>
 
 ```bash
 python scripts/train.py \
@@ -71,8 +58,10 @@ python scripts/train.py \
   --num_envs 512 --max_iterations 500 --headless \
   --run_name right_arm_exp1
 ```
+</details>
 
-### 双臂对打
+<details>
+<summary>双臂对打</summary>
 
 ```bash
 python scripts/train.py \
@@ -80,10 +69,17 @@ python scripts/train.py \
   --num_envs 512 --max_iterations 1000 --headless \
   --run_name dual_arm_exp1
 ```
+</details>
 
-> 建议先用 `--num_envs 16 --max_iterations 1` 做 smoke test 确认环境正常。
+## 预训练模型 & 推理
 
-## 推理 & 可视化
+已提供训练好的 checkpoint，可用于 Isaac Lab 环境下的推理可视化：
+
+| 文件 | 用途 | 指标 |
+|------|------|------|
+| `checkpoints/left_v9_model_6034.pt` | 左臂 v9（最优） | 97% clean_right |
+| `checkpoints/right_v9_model_5472.pt` | 右臂 v9（最优） | 84% 成功率 |
+| `checkpoints/left_scratch_model_499.pt` | 左臂从头训练基线 | 基线参考 |
 
 ```bash
 # 单臂推理（GUI 模式，可观察击球效果）
@@ -98,14 +94,6 @@ python scripts/play.py \
   --num_envs 1 --real-time \
   --checkpoint <path/to/dual_checkpoint.pt>
 ```
-
-## 预训练模型
-
-| 文件 | 用途 | 指标 |
-|------|------|------|
-| `checkpoints/left_v9_model_6034.pt` | 左臂 v9（最优） | 97% clean_right |
-| `checkpoints/right_v9_model_5472.pt` | 右臂 v9（最优） | 84% 成功率 |
-| `checkpoints/left_scratch_model_499.pt` | 左臂从头训练基线 | 基线参考 |
 
 ## 核心技术设计
 
