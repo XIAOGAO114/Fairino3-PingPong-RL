@@ -1,6 +1,6 @@
 # 🏓 Fairino3 双臂乒乓球对打 — 强化学习
 
-> 哈尔滨工业大学 大创项目 | Isaac Lab 0.54.3 + Isaac Sim 4.5.0 + RSL RL PPO
+> Isaac Lab 0.54.3 + Isaac Sim 4.5.0 + RSL RL PPO
 
 ## Demo
 
