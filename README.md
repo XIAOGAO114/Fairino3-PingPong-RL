@@ -28,17 +28,16 @@
 
 ```
 ├── source/
-│   ├── test_isaac_rail/        # 单臂训练包（左臂 + 右臂任务）
-│   ├── test_isaac_rail_right/  # 右臂独立训练包
-│   └── test_isaac_dual/        # 双臂对打包（DualArmActor）
+│   ├── fairino3_rail/        # 单臂训练包（左臂 + 右臂任务）
+│   ├── fairino3_rail_right/  # 右臂独立训练包
+│   └── fairino3_dual/        # 双臂对打包（DualArmActor）
 ├── scripts/
 │   ├── train.py                # 双臂训练 / 单臂权重合并
 │   ├── train_single_arm_left.py    # 左臂单臂训练
 │   ├── train_single_arm_right.py   # 右臂单臂训练
 │   ├── play.py                 # 推理可视化
 │   ├── eval_rally.py           # 双臂 rally 评估
-│   ├── eval_merged.py          # 合并模型逐回合评估
-│   └── eval_single_checkpoints.py  # 单臂落台率评估
+│   └── eval_merged.py          # 合并模型逐回合评估
 ├── checkpoints/                # 最终配方模型权重
 │   ├── left_scratch_bc_999.pt      # 左臂（落台 74.95%）
 │   ├── right_scratch_bc_999.pt     # 右臂（落台 69.03%）
@@ -76,9 +75,9 @@
 在 Isaac Lab workspace 的 Python 环境中，依次安装三个扩展包：
 
 ```bash
-./isaaclab.sh -p -m pip install -e source/test_isaac_rail
-./isaaclab.sh -p -m pip install -e source/test_isaac_rail_right
-./isaaclab.sh -p -m pip install -e source/test_isaac_dual
+./isaaclab.sh -p -m pip install -e source/fairino3_rail
+./isaaclab.sh -p -m pip install -e source/fairino3_rail_right
+./isaaclab.sh -p -m pip install -e source/fairino3_dual
 ```
 
 ---

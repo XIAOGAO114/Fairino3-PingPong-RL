@@ -6,14 +6,14 @@ Reports distribution of 0/1/2+ exchanges, mean, max.
 import sys, os, torch, numpy as np, torch.nn as nn
 from isaaclab.app import AppLauncher
 
-CKPT = sys.argv[1] if len(sys.argv) > 1 else "/home/glq/isaac_ws/test_isaac_dual/logs/rsl_rl/fairino3_dual_centerline_v1/merged_2042_2042/model_0.pt"
+CKPT = sys.argv[1] if len(sys.argv) > 1 else "<TRAIN_WORKSPACE>/fairino3_dual/logs/rsl_rl/fairino3_dual_centerline_v1/merged_2042_2042/model_0.pt"
 STEPS = int(sys.argv[2]) if len(sys.argv) > 2 else 1000
 NUM_ENVS = 256
 
-sys.path.insert(0, "/home/glq/isaac_ws/test_isaac_dual/source")
+sys.path.insert(0, "<TRAIN_WORKSPACE>/fairino3_dual/source")
 app = AppLauncher(headless=True, args=['']); sim = app.app
 import gymnasium as gym
-import test_isaac_rail.tasks; import test_isaac_dual.tasks
+import fairino3_rail.tasks; import fairino3_dual.tasks
 from isaaclab_tasks.utils.parse_cfg import load_cfg_from_registry
 
 cfg = load_cfg_from_registry("Fairino3-PingPong-Dual-Centerline-v0", "env_cfg_entry_point")

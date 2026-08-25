@@ -86,7 +86,7 @@
 
 ## 七、复现信息
 
-- 左臂模型：`test_isaac_rail/logs/.../scratch_bc_left/model_999.pt`
-- 右臂模型：`test_isaac_rail_right/logs/.../scratch_bc_right/model_999.pt`
-- 合并模型：`test_isaac_dual/logs/.../merged_BC_L999_R999/model_0.pt`
+- 左臂模型：`fairino3_rail/logs/.../scratch_bc_left/model_999.pt`
+- 右臂模型：`fairino3_rail_right/logs/.../scratch_bc_right/model_999.pt`
+- 合并模型：`fairino3_dual/logs/.../merged_BC_L999_R999/model_0.pt`
 - 训练配置：同时运行 4096 个独立仿真场景（专业叫"并行仿真环境"）× 1000 轮迭代，从头训练（无预训练）。

@@ -17,7 +17,7 @@ load_run: .*
 load_checkpoint: model_.*.pt
 class_name: OnPolicyRunner
 actor:
-  class_name: test_isaac_dual.tasks.manager_based.fairino3_dual_pingpong.models.DualArmActor
+  class_name: fairino3_dual.tasks.manager_based.fairino3_dual_pingpong.models.DualArmActor
   hidden_dims:
   - 512
   - 256

@@ -13,8 +13,8 @@ app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
 import gymnasium as gym
-import test_isaac_dual.tasks
-from test_isaac_dual.tasks.manager_based.fairino3_dual_pingpong.fairino3_dual_pingpong_env_cfg import Fairino3DualPingPongCenterlineEnvCfg
+import fairino3_dual.tasks
+from fairino3_dual.tasks.manager_based.fairino3_dual_pingpong.fairino3_dual_pingpong_env_cfg import Fairino3DualPingPongCenterlineEnvCfg
 
 env_cfg = Fairino3DualPingPongCenterlineEnvCfg()
 env_cfg.seed = 42
@@ -24,7 +24,7 @@ device = env.unwrapped.device
 
 # Load model
 ckpt = torch.load(args_cli.checkpoint, map_location=device, weights_only=False)
-from test_isaac_dual.tasks.manager_based.fairino3_dual_pingpong.models.dual_arm_actor import DualArmActor
+from fairino3_dual.tasks.manager_based.fairino3_dual_pingpong.models.dual_arm_actor import DualArmActor
 obs, _ = env.reset()
 model = DualArmActor(
     obs=obs, obs_groups={'actor': ['policy'], 'critic': ['policy']}, obs_set='actor', output_dim=14,
