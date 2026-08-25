@@ -54,13 +54,20 @@
 
 | 组件 | 版本 |
 |------|------|
-| Isaac Sim | 4.5.0 |
+| Isaac Sim | 5.1.0 |
 | Isaac Lab | 0.54.3 |
-| Python | ≥ 3.10 |
-| RSL-RL | 3.0.1（Isaac Lab 内置） |
+| Python | 3.11 |
+| RSL-RL (rsl-rl-lib) | 5.0.1 |
+| PyTorch | 2.7.0+cu128 |
+| Gymnasium | 1.2.1 |
 | GPU | NVIDIA（Isaac Sim 依赖） |
 
-> Isaac Lab 0.54.x 对应 Isaac Sim 4.5.0，版本必须匹配。
+> **版本说明**
+>
+> - **Isaac Lab 与 Isaac Sim 严格绑定**，不能随意混配版本。上表是训练本项目的实测组合，复现请以它为准。
+> - Isaac Sim 5.x 使用 **Python 3.11**（4.5 时代用 3.10），Python 版本由 Isaac Sim 版本决定。
+> - RSL-RL：训练脚本内设最低版本检查 `rsl-rl-lib >= 3.0.1`，本环境实测 5.0.1；推理脚本 `play.py` 会按 `>= 4.0.0` 自动切换新旧导出 API。
+> - PyTorch 为 CUDA 12.8（cu128）构建，需 NVIDIA 显卡与匹配驱动。
 
 ---
 
