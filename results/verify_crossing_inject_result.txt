@@ -1,0 +1,11 @@
+OK: reset_ball_from_crossing defined, params=['env', 'env_ids', 'asset_cfg', 'net_x', 'pos_mean', 'pos_std', 'vel_mean', 'vel_std', 'home_side']
+OK: env_cfg reset_ball -> mdp.reset_ball_from_crossing
+  param pos_mean: present
+  param pos_std: present
+  param vel_mean: present
+  param vel_std: present
+  param home_side: present
+OK: mdp/__init__ star-imports events -> symbol resolves
+OK: smoke-test runtime log present: True
+
+RESULT: PASS

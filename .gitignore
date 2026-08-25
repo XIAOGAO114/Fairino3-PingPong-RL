@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.eggs/
+build/
+dist/
+
+# Isaac Sim / Isaac Lab
+*.usd~
+*.usda~
+*.bak
+
+# Logs / checkpoints 训练中间产物
+logs/
+outputs/
+*.log
+*.out
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

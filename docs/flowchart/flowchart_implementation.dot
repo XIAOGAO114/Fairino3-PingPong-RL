@@ -1,0 +1,72 @@
+digraph pingpong_flow {
+    // ===== 全局样式：汇报友好浅色系 =====
+    bgcolor="white";
+    rankdir=TB;
+    fontname="Noto Sans CJK SC";
+    fontsize=14;
+    nodesep=0.55;
+    ranksep=0.42;
+    pad=0.4;
+    dpi=120;
+
+    node [shape=box, style="rounded,filled", fontname="Noto Sans CJK SC", fontsize=12, margin="0.16,0.10", color="#cbd5e1", penwidth=1.2];
+    edge [fontname="Noto Sans CJK SC", fontsize=10, color="#64748b", arrowsize=0.7, penwidth=1.3];
+
+    // ===== 节点（HTML table label，标题带色 + 正文多行） =====
+    N_GOAL [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#1e3a8a" STYLE="ROUNDED"><FONT COLOR="white"><B>总体目标</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b">两个 <B>7-DOF Fairino3 机械臂</B><BR/>持续对打（Rally）</FONT></TD></TR>
+        </TABLE>>];
+
+    N_STAGE1 [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#2563eb" STYLE="ROUNDED"><FONT COLOR="white"><B>① 机械设计突破</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b"><B>6-DOF</B> 固定底座 → 缺横向自由度<BR/>→ 击球后<B>二次触碰</B>（illegal 2nd hit）<BR/><B>决策</B>：增设 <B>rail_y 导轨</B> → 7-DOF</FONT></TD></TR>
+            <TR><TD BGCOLOR="#fff7ed"><FONT COLOR="#9a3412" POINT-SIZE="9">教训：机械问题优先用机械解决</FONT></TD></TR>
+        </TABLE>>];
+
+    N_STAGE2 [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#2563eb" STYLE="ROUNDED"><FONT COLOR="white"><B>② 仿真环境搭建</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b">Isaac Sim 4.5.0 + Isaac Lab 0.54.3<BR/>+ RSL RL PPO（Actor-Critic）<BR/><B>动作空间</B>：rail_y + j1–j6（7-DOF）<BR/><B>物理</B>：球角阻尼 = 0.05</FONT></TD></TR>
+        </TABLE>>];
+
+    N_STAGE3 [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#2563eb" STYLE="ROUNDED"><FONT COLOR="white"><B>③ 单臂强化学习训练</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b"><B>左臂</B>：legal_post_hit_mask 门控<BR/>→ <B>97%</B> clean_right、0% 二次触碰<BR/><B>右臂</B>：镜像配置（x=2.07，180°）<BR/>→ <B>84%</B> 训练成功率<BR/><B>从零训练关键</B>：init_noise_std=0.7 + 好种子</FONT></TD></TR>
+            <TR><TD BGCOLOR="#fff7ed"><FONT COLOR="#9a3412" POINT-SIZE="9">左右臂须对齐代码 / 奖励 / 噪声 / 种子</FONT></TD></TR>
+        </TABLE>>];
+
+    N_STAGE4 [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#2563eb" STYLE="ROUNDED"><FONT COLOR="white"><B>④ 双臂对打架构</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b"><B>DualArmActor</B>：两个独立策略 MLP<BR/>+ 共享价值网络（14-DOF 动作）<BR/><B>_make_arm_rewards()</B>：<BR/>按 home_side 生成左右镜像奖励</FONT></TD></TR>
+        </TABLE>>];
+
+    N_INNOV [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#ea580c" STYLE="ROUNDED"><FONT COLOR="white"><B>⑤ 核心创新：对手兼容奖励</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#fff7ed"><FONT COLOR="#9a3412"><B>opponent_compatible</B>：把回球打向<BR/>对手训练发球/接球的舒适区<BR/><B>opponent_vz_quality</B>：对瓶颈维度<BR/>（垂直速度 vz）增加独立奖励项</FONT></TD></TR>
+        </TABLE>>];
+
+    N_EVAL [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#047857" STYLE="ROUNDED"><FONT COLOR="white"><B>⑥ 评估 · 合并 · 演示</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#ecfdf5"><FONT COLOR="#064e3b">兼容率 <B>eval_compat</B>｜瓶颈诊断 <B>eval_compat_diag</B><BR/>合并双臂 <B>merge_dual</B> → Rally <B>eval_rally</B><BR/>演示视频 <B>play</B>（多种子）｜图表 <B>generate_charts</B></FONT></TD></TR>
+        </TABLE>>];
+
+    N_RESULT [fillcolor="transparent", label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" STYLE="ROUNDED">
+            <TR><TD BGCOLOR="#1e3a8a" STYLE="ROUNDED"><FONT COLOR="white"><B>项目成果</B></FONT></TD></TR>
+            <TR><TD BGCOLOR="#eff6ff"><FONT COLOR="#1e293b">可持续对打 Demo +<BR/>评估图表 / 训练曲线 / 报告</FONT></TD></TR>
+        </TABLE>>];
+
+    // ===== 主流程连线 =====
+    N_GOAL -> N_STAGE1 -> N_STAGE2 -> N_STAGE3 -> N_STAGE4 -> N_INNOV -> N_EVAL -> N_RESULT;
+
+    // ===== 迭代反馈回路（不达标 → 回流优化） =====
+    edge [constraint=false, style="dashed", color="#dc2626", fontcolor="#dc2626", penwidth=1.4];
+    N_EVAL -> N_STAGE3 [xlabel="不达标\n反馈：调奖励/\n换种子/对齐左右臂"];
+}

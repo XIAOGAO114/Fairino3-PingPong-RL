@@ -1,0 +1,6 @@
+OK: env_cfg.py parses cleanly
+OK: diff == exactly the 4 reward-ladder lines (single variable)
+OK: reset_ball == original serve (baseline-consistent)
+OK: runtime: compat_ladder_v1 training alive (new config loads & runs)
+
+RESULT: PASS

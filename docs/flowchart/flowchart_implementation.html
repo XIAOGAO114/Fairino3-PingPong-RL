@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fairino3 双臂乒乓球对打 — 实现思路流程图</title>
+<style>
+  body { margin: 0; padding: 24px; background: #f8fafc; font-family: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .header { max-width: 1000px; margin: 0 auto 16px; }
+  .header h1 { color: #1e293b; font-size: 22px; margin: 0 0 6px; }
+  .header p { color: #64748b; font-size: 14px; margin: 0; }
+  .diagram { max-width: 550px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; box-shadow: 0 4px 16px rgba(15,23,42,.06); }
+  .footer { max-width: 1000px; margin: 16px auto 0; color: #94a3b8; font-size: 12px; text-align: center; }
+  .footer a { color: #2563eb; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>🔬 Fairino3 双臂乒乓球对打 — 实现思路流程图</h1>
+    <p>NVIDIA Isaac Lab · 强化学习 · 机械臂对打</p>
+  </div>
+  <div class="diagram">
+    <!-- 内嵌 SVG，矢量可无限缩放 -->
+    <div id="svg-container"></div>
+  </div>
+  <div class="footer">大创项目 · 实现思路流程 | 生成于 Hermes Agent</div>
+
+  <script>
+    // 从同目录加载 SVG 并内嵌显示
+    fetch('flowchart_implementation.svg')
+      .then(r => r.text())
+      .then(svg => {
+        document.getElementById('svg-container').innerHTML = svg;
+      })
+      .catch(() => {
+        document.getElementById('svg-container').innerHTML =
+          '<p style="color:#dc2626">无法加载 flowchart_implementation.svg，请直接打开 SVG 文件查看。</p>';
+      });
+  </script>
+</body>
+</html>

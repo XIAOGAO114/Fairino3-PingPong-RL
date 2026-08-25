@@ -1,0 +1,9 @@
+OK: events.py parses cleanly
+OK: events.py reads _ball_speed_scale: True
+OK: initial serve scale present: True
+OK: retry serve scale present: True
+OK: train.py parses cleanly
+OK: train.py has --ball-speed-scale arg: True
+OK: train.py sets env._ball_speed_scale: True
+
+RESULT: PASS

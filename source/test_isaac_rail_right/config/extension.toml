@@ -1,0 +1,22 @@
+[package]
+
+version = "0.1.0"
+category = "isaaclab"
+readme  = "README.md"
+
+title = "Fairino3 Rail Ping-Pong"
+author = "User"
+maintainer = "User"
+description = "Fairino3 V6 ping-pong with Y-axis rail for single-arm training"
+repository = ""
+keywords = ["fairino3", "pingpong", "rail", "isaaclab"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_mimic" = {}
+"isaaclab_rl" = {}
+"isaaclab_tasks" = {}
+
+[[python.module]]
+name = "test_isaac_rail_right"
