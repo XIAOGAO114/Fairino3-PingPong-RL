@@ -45,7 +45,7 @@
 │   └── merged_BC_L999_R999.pt      # 双臂合并（rally 36.60%）
 ├── configs/                    # 训练时的完整配置快照（复现用）
 ├── videos/                     # 演示视频
-└── docs/                       # 结题报告 + 配图 + 调参流程图
+└── docs/                       # 结题报告、配图、调参流程图、关键经验教训
 ```
 
 ---
@@ -167,6 +167,8 @@ python scripts/train.py \
 2. **低权重兼容奖励**（解决"回得刁钻"）—— 重新加回"打到对手舒服位置"，但把权重从 120 压到 20，做到"既要落台、又要对手接得住"
 
 这个反直觉结论对双机协作/对抗类任务有普遍参考价值：**只优化单体的局部目标，可能反而损害整体的协作表现。**
+
+> 更多训练过程的经验与踩坑记录见 [docs/KEY_LEARNINGS.md](docs/KEY_LEARNINGS.md)，结题答辩素材见 [docs/jieqi_report.md](docs/jieqi_report.md)，调参流程图见 [docs/flowchart/](docs/flowchart/)。
 
 ---
 
