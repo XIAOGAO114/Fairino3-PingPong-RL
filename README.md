@@ -75,10 +75,12 @@
 在 Isaac Lab workspace 的 Python 环境中，依次安装三个扩展包：
 
 ```bash
-./isaaclab.sh -p -m pip install -e source/fairino3_rail
-./isaaclab.sh -p -m pip install -e source/fairino3_rail_right
-./isaaclab.sh -p -m pip install -e source/fairino3_dual
+./isaaclab.sh -p -m pip install --no-build-isolation -e source/fairino3_rail
+./isaaclab.sh -p -m pip install --no-build-isolation -e source/fairino3_rail_right
+./isaaclab.sh -p -m pip install --no-build-isolation -e source/fairino3_dual
 ```
+
+> 需要 `--no-build-isolation`：这些包的 `setup.py` 通过 `import toml` 读取 `extension.toml`，而 pip 默认的构建隔离环境不带 `toml`，会报 `ModuleNotFoundError: No module named 'toml'`。用 `--no-build-isolation` 直接复用当前环境即可（实测本机已通过）。
 
 ---
 
